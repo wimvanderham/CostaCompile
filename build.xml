@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="TTG on Cloud">
+  <property environment="env" />
+  <taskdef resource="PCT.properties" classpath="/usr/share/ant/lib/PCT.jar"/>
+  <typedef resource="types.properties" classpath="/usr/share/ant/lib/PCT.jar"/>
+
+  <target name="creDB" description="Create DB TTG from file .df">
+    <PCTCreateDatabase dbName="ttgres" destDir="db" schemaFile="db/ttgres.df" dlcHome="${env.DLC}" />
+  </target>
+
+  <target name="computl" description="Compilazione sorgenti nella sottocartella utl">
+    <PCTCompile graphicalMode="False" destDir="rcode" displayFiles="1" dlcHome="${env.DLC}">
+      <fileset dir="/appl/${env.AMBIENTE}/utl" includes="*.p, *.w, *.cls" />
+      <DBConnection dbName="/db/costaprd/ttgres" hostName="localhost" dbPort="costa_prd" userName="compile" password="compile" singleUser="False" />
+      <propath>
+        <pathelement path="/appl/${env.AMBIENTE}"/>
+        <pathelement path="/appl/${env.AMBIENTE}/sub"/>
+        <pathelement path="/appl/${env.AMBIENTE}/scr"/>
+        <pathelement path="/appl/${env.AMBIENTE}/common"/>
+        <pathelement path="/appl/${env.AMBIENTE}/cst"/>
+        <pathelement path="/appl/${env.AMBIENTE}/hpl"/>
+        <pathelement path="/appl/${env.AMBIENTE}/cos"/>
+        <pathelement path="/appl/${env.AMBIENTE}/act"/>
+        <pathelement path="/appl/${env.AMBIENTE}/agt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/air"/>
+        <pathelement path="/appl/${env.AMBIENTE}/api"/>
+        <pathelement path="/appl/${env.AMBIENTE}/aoa"/>
+        <pathelement path="/appl/${env.AMBIENTE}/aud"/>
+        <pathelement path="/appl/${env.AMBIENTE}/bkg"/>
+        <pathelement path="/appl/${env.AMBIENTE}/bud"/>
+        <pathelement path="/appl/${env.AMBIENTE}/car"/>
+        <pathelement path="/appl/${env.AMBIENTE}/chg"/>
+        <pathelement path="/appl/${env.AMBIENTE}/cki"/>
+        <pathelement path="/appl/${env.AMBIENTE}/cxi"/>
+        <pathelement path="/appl/${env.AMBIENTE}/dbe"/>
+        <pathelement path="/appl/${env.AMBIENTE}/dng"/>
+        <pathelement path="/appl/${env.AMBIENTE}/dqs"/>
+        <pathelement path="/appl/${env.AMBIENTE}/dts"/>
+        <pathelement path="/appl/${env.AMBIENTE}/edt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/fct"/>
+        <pathelement path="/appl/${env.AMBIENTE}/gen"/>
+        <pathelement path="/appl/${env.AMBIENTE}/grp"/>
+        <pathelement path="/appl/${env.AMBIENTE}/hlp"/>
+        <pathelement path="/appl/${env.AMBIENTE}/htl"/>
+        <pathelement path="/appl/${env.AMBIENTE}/ifc"/>
+        <pathelement path="/appl/${env.AMBIENTE}/int"/>
+        <pathelement path="/appl/${env.AMBIENTE}/inv"/>
+        <pathelement path="/appl/${env.AMBIENTE}/lou"/>
+        <pathelement path="/appl/${env.AMBIENTE}/mnu"/>
+        <pathelement path="/appl/${env.AMBIENTE}/msc"/>
+        <pathelement path="/appl/${env.AMBIENTE}/opt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/pkg"/>
+        <pathelement path="/appl/${env.AMBIENTE}/pmt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/prd"/>
+        <pathelement path="/appl/${env.AMBIENTE}/prg"/>
+        <pathelement path="/appl/${env.AMBIENTE}/rev"/>
+        <pathelement path="/appl/${env.AMBIENTE}/rpm"/>
+        <pathelement path="/appl/${env.AMBIENTE}/rpt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/scr"/>
+        <pathelement path="/appl/${env.AMBIENTE}/scz"/>
+        <pathelement path="/appl/${env.AMBIENTE}/shp"/>
+        <pathelement path="/appl/${env.AMBIENTE}/ssv"/>
+        <pathelement path="/appl/${env.AMBIENTE}/sub"/>
+        <pathelement path="/appl/${env.AMBIENTE}/sum"/>
+        <pathelement path="/appl/${env.AMBIENTE}/sys"/>
+        <pathelement path="/appl/${env.AMBIENTE}/tkt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/trf"/>
+        <pathelement path="/appl/${env.AMBIENTE}/trg"/>
+        <pathelement path="/appl/${env.AMBIENTE}/utl"/>
+        <pathelement path="/appl/${env.AMBIENTE}/tpt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/data"/>
+        <pathelement path="/appl/${env.AMBIENTE}/once"/>
+        <pathelement path="/appl/${env.AMBIENTE}/prv"/>
+        <pathelement path="/appl/${env.AMBIENTE}/bl"/>
+        <pathelement path="/appl/${env.AMBIENTE}/bm"/>
+        <pathelement path="/appl/${env.AMBIENTE}/dwh"/>
+        <pathelement path="/appl/${env.AMBIENTE}/prs"/>
+        <pathelement path="/appl/${env.AMBIENTE}/bus"/>
+        <pathelement path="/appl/${env.AMBIENTE}/py3"/>
+        <pathelement path="${env.DLC}/tty/netlib/OpenEdge.Net.pl"/>
+      </propath>
+    </PCTCompile>
+  </target>
+
+  <target name="compaoadir" description="Compilazione sorgenti nella sottocartella aoa">
+    <PCTCompile graphicalMode="False" displayFiles="1" dlcHome="${env.DLC}">
+      <fileset dir="/appl/${env.AMBIENTE}/aoa" includes="**/*.p, **/*.w, **/*.cls" />
+      <DBConnection dbName="/db/costaprd/ttgres" hostName="localhost" dbPort="costa_prd" userName="compile" password="compile" singleUser="False" />
+      <propath>
+        <pathelement path="rcode"/>
+        <pathelement path="/appl/${env.AMBIENTE}"/>
+        <pathelement path="/appl/${env.AMBIENTE}/sub"/>
+        <pathelement path="/appl/${env.AMBIENTE}/scr"/>
+        <pathelement path="/appl/${env.AMBIENTE}/common"/>
+        <pathelement path="/appl/${env.AMBIENTE}/cst"/>
+        <pathelement path="/appl/${env.AMBIENTE}/hpl"/>
+        <pathelement path="/appl/${env.AMBIENTE}/cos"/>
+        <pathelement path="/appl/${env.AMBIENTE}/act"/>
+        <pathelement path="/appl/${env.AMBIENTE}/agt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/air"/>
+        <pathelement path="/appl/${env.AMBIENTE}/api"/>
+        <pathelement path="/appl/${env.AMBIENTE}/aoa"/>
+        <pathelement path="/appl/${env.AMBIENTE}/aud"/>
+        <pathelement path="/appl/${env.AMBIENTE}/bkg"/>
+        <pathelement path="/appl/${env.AMBIENTE}/bud"/>
+        <pathelement path="/appl/${env.AMBIENTE}/car"/>
+        <pathelement path="/appl/${env.AMBIENTE}/chg"/>
+        <pathelement path="/appl/${env.AMBIENTE}/cki"/>
+        <pathelement path="/appl/${env.AMBIENTE}/cxi"/>
+        <pathelement path="/appl/${env.AMBIENTE}/dbe"/>
+        <pathelement path="/appl/${env.AMBIENTE}/dng"/>
+        <pathelement path="/appl/${env.AMBIENTE}/dqs"/>
+        <pathelement path="/appl/${env.AMBIENTE}/dts"/>
+        <pathelement path="/appl/${env.AMBIENTE}/edt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/fct"/>
+        <pathelement path="/appl/${env.AMBIENTE}/gen"/>
+        <pathelement path="/appl/${env.AMBIENTE}/grp"/>
+        <pathelement path="/appl/${env.AMBIENTE}/hlp"/>
+        <pathelement path="/appl/${env.AMBIENTE}/htl"/>
+        <pathelement path="/appl/${env.AMBIENTE}/ifc"/>
+        <pathelement path="/appl/${env.AMBIENTE}/int"/>
+        <pathelement path="/appl/${env.AMBIENTE}/inv"/>
+        <pathelement path="/appl/${env.AMBIENTE}/lou"/>
+        <pathelement path="/appl/${env.AMBIENTE}/mnu"/>
+        <pathelement path="/appl/${env.AMBIENTE}/msc"/>
+        <pathelement path="/appl/${env.AMBIENTE}/opt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/pkg"/>
+        <pathelement path="/appl/${env.AMBIENTE}/pmt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/prd"/>
+        <pathelement path="/appl/${env.AMBIENTE}/prg"/>
+        <pathelement path="/appl/${env.AMBIENTE}/rev"/>
+        <pathelement path="/appl/${env.AMBIENTE}/rpm"/>
+        <pathelement path="/appl/${env.AMBIENTE}/rpt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/scr"/>
+        <pathelement path="/appl/${env.AMBIENTE}/scz"/>
+        <pathelement path="/appl/${env.AMBIENTE}/shp"/>
+        <pathelement path="/appl/${env.AMBIENTE}/ssv"/>
+        <pathelement path="/appl/${env.AMBIENTE}/sub"/>
+        <pathelement path="/appl/${env.AMBIENTE}/sum"/>
+        <pathelement path="/appl/${env.AMBIENTE}/sys"/>
+        <pathelement path="/appl/${env.AMBIENTE}/tkt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/trf"/>
+        <pathelement path="/appl/${env.AMBIENTE}/trg"/>
+        <pathelement path="/appl/${env.AMBIENTE}/utl"/>
+        <pathelement path="/appl/${env.AMBIENTE}/tpt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/data"/>
+        <pathelement path="/appl/${env.AMBIENTE}/once"/>
+        <pathelement path="/appl/${env.AMBIENTE}/prv"/>
+        <pathelement path="/appl/${env.AMBIENTE}/bl"/>
+        <pathelement path="/appl/${env.AMBIENTE}/bm"/>
+        <pathelement path="/appl/${env.AMBIENTE}/dwh"/>
+        <pathelement path="/appl/${env.AMBIENTE}/prs"/>
+        <pathelement path="/appl/${env.AMBIENTE}/bus"/>
+        <pathelement path="/appl/${env.AMBIENTE}/py3"/>
+        <pathelement path="${env.DLC}/tty/netlib/OpenEdge.Net.pl"/>
+      </propath>
+    </PCTCompile>
+  </target>
+
+  <target name="compall" description="Compilazione di tutti i sorgenti nella cartella /appl/${env.AMBIENTE}">
+	  <PCTCompile graphicalMode="False" destDir="/appl/${env.AMBIENTE}/rcode" displayFiles="1" dlcHome="${env.DLC}">
+      <fileset dir="/appl/${env.AMBIENTE}/" 
+        includes="**/*.p, **/*.w, **/*.cls"
+        excludes="once/, common/OLD-09OCT03/, rtb_inst/,AIDA-exp-catalog2-TS.p,scz/exp-catalog2.p,scz/exp-catalog2_np.p,scz/exp-catalog3.p,scz/exp-catalog3_np.p,scz/exp-catalogw_np.p,scz/AIDA-exp-catalog2-TS.p"
+      />
+      <DBConnection dbName="/db/costaprd/ttgres" hostName="localhost" dbPort="costa_prd" userName="compile" password="compile" singleUser="False" />
+      <propath>
+        <pathelement path="rcode"/>
+        <pathelement path="/appl/${env.AMBIENTE}"/>
+        <pathelement path="/appl/${env.AMBIENTE}/sub"/>
+        <pathelement path="/appl/${env.AMBIENTE}/scr"/>
+        <pathelement path="/appl/${env.AMBIENTE}/common"/>
+        <pathelement path="/appl/${env.AMBIENTE}/cst"/>
+        <pathelement path="/appl/${env.AMBIENTE}/hpl"/>
+        <pathelement path="/appl/${env.AMBIENTE}/cos"/>
+        <pathelement path="/appl/${env.AMBIENTE}/act"/>
+        <pathelement path="/appl/${env.AMBIENTE}/agt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/air"/>
+        <pathelement path="/appl/${env.AMBIENTE}/api"/>
+        <pathelement path="/appl/${env.AMBIENTE}/aoa"/>
+        <pathelement path="/appl/${env.AMBIENTE}/aud"/>
+        <pathelement path="/appl/${env.AMBIENTE}/bkg"/>
+        <pathelement path="/appl/${env.AMBIENTE}/bud"/>
+        <pathelement path="/appl/${env.AMBIENTE}/car"/>
+        <pathelement path="/appl/${env.AMBIENTE}/chg"/>
+        <pathelement path="/appl/${env.AMBIENTE}/cki"/>
+        <pathelement path="/appl/${env.AMBIENTE}/cxi"/>
+        <pathelement path="/appl/${env.AMBIENTE}/dbe"/>
+        <pathelement path="/appl/${env.AMBIENTE}/dng"/>
+        <pathelement path="/appl/${env.AMBIENTE}/dqs"/>
+        <pathelement path="/appl/${env.AMBIENTE}/dts"/>
+        <pathelement path="/appl/${env.AMBIENTE}/edt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/fct"/>
+        <pathelement path="/appl/${env.AMBIENTE}/gen"/>
+        <pathelement path="/appl/${env.AMBIENTE}/grp"/>
+        <pathelement path="/appl/${env.AMBIENTE}/hlp"/>
+        <pathelement path="/appl/${env.AMBIENTE}/htl"/>
+        <pathelement path="/appl/${env.AMBIENTE}/ifc"/>
+        <pathelement path="/appl/${env.AMBIENTE}/int"/>
+        <pathelement path="/appl/${env.AMBIENTE}/inv"/>
+        <pathelement path="/appl/${env.AMBIENTE}/lou"/>
+        <pathelement path="/appl/${env.AMBIENTE}/mnu"/>
+        <pathelement path="/appl/${env.AMBIENTE}/msc"/>
+        <pathelement path="/appl/${env.AMBIENTE}/opt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/pkg"/>
+        <pathelement path="/appl/${env.AMBIENTE}/pmt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/prd"/>
+        <pathelement path="/appl/${env.AMBIENTE}/prg"/>
+        <pathelement path="/appl/${env.AMBIENTE}/rev"/>
+        <pathelement path="/appl/${env.AMBIENTE}/rpm"/>
+        <pathelement path="/appl/${env.AMBIENTE}/rpt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/scr"/>
+        <pathelement path="/appl/${env.AMBIENTE}/scz"/>
+        <pathelement path="/appl/${env.AMBIENTE}/shp"/>
+        <pathelement path="/appl/${env.AMBIENTE}/ssv"/>
+        <pathelement path="/appl/${env.AMBIENTE}/sub"/>
+        <pathelement path="/appl/${env.AMBIENTE}/sum"/>
+        <pathelement path="/appl/${env.AMBIENTE}/sys"/>
+        <pathelement path="/appl/${env.AMBIENTE}/tkt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/trf"/>
+        <pathelement path="/appl/${env.AMBIENTE}/trg"/>
+        <pathelement path="/appl/${env.AMBIENTE}/utl"/>
+        <pathelement path="/appl/${env.AMBIENTE}/tpt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/data"/>
+        <pathelement path="/appl/${env.AMBIENTE}/once"/>
+        <pathelement path="/appl/${env.AMBIENTE}/prv"/>
+        <pathelement path="/appl/${env.AMBIENTE}/bl"/>
+        <pathelement path="/appl/${env.AMBIENTE}/bm"/>
+        <pathelement path="/appl/${env.AMBIENTE}/dwh"/>
+        <pathelement path="/appl/${env.AMBIENTE}/prs"/>
+        <pathelement path="/appl/${env.AMBIENTE}/bus"/>
+        <pathelement path="/appl/${env.AMBIENTE}/py3"/>
+        <pathelement path="/appl/${env.AMBIENTE}/custom/interfaces/dwm/out"/>
+        <pathelement path="/appl/${env.AMBIENTE}/custom/interfaces/sic/out"/>
+        <pathelement path="${env.DLC}/tty/netlib/OpenEdge.Net.pl"/>
+      </propath>
+    </PCTCompile>
+  </target>
+
+  <target name="cp_r_code" description="Copia r code in cartella principale">
+    <copy todir="/appl/${env.AMBIENTE}/rcode" flatten="true">
+      <fileset dir="/appl/${env.AMBIENTE}/rcode">
+         <include name="**/*r" />
+	 <exclude name="aoa/"/>
+      </fileset>
+    </copy>
+    <copy todir="/appl/${env.AMBIENTE}/">
+      <fileset dir="/appl/${env.AMBIENTE}/rcode">
+	      <include name="aoa/**/*.r" />
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="cp_r_code_no_aoa" description="Copia r code in cartella principale, tranne aoa">
+    <copy todir="/appl/${env.AMBIENTE}/rcode" flatten="true">
+      <fileset dir="/appl/${env.AMBIENTE}/rcode">
+         <include name="**/*r" />
+	 <exclude name="aoa/"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="cp_r_code_aoa" description="Copia r code dalla cartella rcode.pct nella cartella del sorgente">
+    <copy todir="/appl/${env.AMBIENTE}/">
+      <fileset dir="/appl/${env.AMBIENTE}/rcode.pct">
+	      <include name="aoa/**/*.r" />
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="compaoa" description="Compilazione dei sorgenti nella cartella /appl/${env.AMBIENTE}/aoa">
+	  <PCTCompile graphicalMode="False" destDir="/appl/${env.AMBIENTE}/rcode.pct/" displayFiles="1" dlcHome="${env.DLC}">
+      <fileset dir="/appl/${env.AMBIENTE}/" includes="aoa/**/*.p, aoa/**/*.w, aoa/**/*.cls" />
+      <DBConnection dbName="/db/costaprd/ttgres" hostName="localhost" dbPort="costa_prd" userName="compile" password="compile" singleUser="False" />
+      <propath>
+        <pathelement path="/appl/${env.AMBIENTE}"/>
+        <pathelement path="/appl/${env.AMBIENTE}/sub"/>
+        <pathelement path="/appl/${env.AMBIENTE}/scr"/>
+        <pathelement path="/appl/${env.AMBIENTE}/common"/>
+        <pathelement path="/appl/${env.AMBIENTE}/cst"/>
+        <pathelement path="/appl/${env.AMBIENTE}/hpl"/>
+        <pathelement path="/appl/${env.AMBIENTE}/cos"/>
+	<pathelement path="/appl/${env.AMBIENTE}/act"/>
+        <pathelement path="/appl/${env.AMBIENTE}/agt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/air"/>
+        <pathelement path="/appl/${env.AMBIENTE}/api"/>
+        <pathelement path="/appl/${env.AMBIENTE}/aoa"/>
+        <pathelement path="/appl/${env.AMBIENTE}/aud"/>
+        <pathelement path="/appl/${env.AMBIENTE}/bkg"/>
+        <pathelement path="/appl/${env.AMBIENTE}/bud"/>
+        <pathelement path="/appl/${env.AMBIENTE}/car"/>
+        <pathelement path="/appl/${env.AMBIENTE}/chg"/>
+        <pathelement path="/appl/${env.AMBIENTE}/cki"/>
+        <pathelement path="/appl/${env.AMBIENTE}/cxi"/>
+        <pathelement path="/appl/${env.AMBIENTE}/dbe"/>
+        <pathelement path="/appl/${env.AMBIENTE}/dng"/>
+        <pathelement path="/appl/${env.AMBIENTE}/dqs"/>
+        <pathelement path="/appl/${env.AMBIENTE}/dts"/>
+        <pathelement path="/appl/${env.AMBIENTE}/edt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/fct"/>
+        <pathelement path="/appl/${env.AMBIENTE}/gen"/>
+        <pathelement path="/appl/${env.AMBIENTE}/grp"/>
+        <pathelement path="/appl/${env.AMBIENTE}/hlp"/>
+        <pathelement path="/appl/${env.AMBIENTE}/htl"/>
+        <pathelement path="/appl/${env.AMBIENTE}/ifc"/>
+        <pathelement path="/appl/${env.AMBIENTE}/int"/>
+        <pathelement path="/appl/${env.AMBIENTE}/inv"/>
+        <pathelement path="/appl/${env.AMBIENTE}/lou"/>
+        <pathelement path="/appl/${env.AMBIENTE}/mnu"/>
+        <pathelement path="/appl/${env.AMBIENTE}/msc"/>
+        <pathelement path="/appl/${env.AMBIENTE}/opt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/pkg"/>
+        <pathelement path="/appl/${env.AMBIENTE}/pmt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/prd"/>
+        <pathelement path="/appl/${env.AMBIENTE}/prg"/>
+        <pathelement path="/appl/${env.AMBIENTE}/rev"/>
+        <pathelement path="/appl/${env.AMBIENTE}/rpm"/>
+        <pathelement path="/appl/${env.AMBIENTE}/rpt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/scr"/>
+        <pathelement path="/appl/${env.AMBIENTE}/scz"/>
+        <pathelement path="/appl/${env.AMBIENTE}/shp"/>
+        <pathelement path="/appl/${env.AMBIENTE}/ssv"/>
+        <pathelement path="/appl/${env.AMBIENTE}/sub"/>
+        <pathelement path="/appl/${env.AMBIENTE}/sum"/>
+        <pathelement path="/appl/${env.AMBIENTE}/sys"/>
+        <pathelement path="/appl/${env.AMBIENTE}/tkt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/trf"/>
+        <pathelement path="/appl/${env.AMBIENTE}/trg"/>
+        <pathelement path="/appl/${env.AMBIENTE}/utl"/>
+        <pathelement path="/appl/${env.AMBIENTE}/tpt"/>
+        <pathelement path="/appl/${env.AMBIENTE}/data"/>
+        <pathelement path="/appl/${env.AMBIENTE}/once"/>
+        <pathelement path="/appl/${env.AMBIENTE}/prv"/>
+        <pathelement path="/appl/${env.AMBIENTE}/bl"/>
+        <pathelement path="/appl/${env.AMBIENTE}/bm"/>
+        <pathelement path="/appl/${env.AMBIENTE}/dwh"/>
+        <pathelement path="/appl/${env.AMBIENTE}/prs"/>
+        <pathelement path="/appl/${env.AMBIENTE}/bus"/>
+        <pathelement path="/appl/${env.AMBIENTE}/py3"/>
+        <pathelement path="/appl/${env.AMBIENTE}/custom/interfaces/dwm/out"/>
+        <pathelement path="/appl/${env.AMBIENTE}/custom/interfaces/sic/out"/>
+        <pathelement path="${env.DLC}/tty/netlib/OpenEdge.Net.pl"/>
+      </propath>
+    </PCTCompile>
+  </target>
+
+  <target name="compsy" description="Compilazione dei sorgenti nella cartella /appl/costaprd/sy">
+    <PCTCompile graphicalMode="False" destDir="/appl/costaprd/rcode.pct/" displayFiles="1" dlcHome="${env.DLC}">
+      <fileset dir="/appl/costaprd/" includes="sy/**/*.p" />
+      <propath>
+        <pathelement path="/appl/costaprd"/>
+      </propath>
+    </PCTCompile>
+    <copy todir="/appl/costaprd/">
+      <fileset dir="/appl/costaprd/rcode.pct">
+              <include name="sy/**/*.r" />
+      </fileset>
+    </copy>
+  </target>
+</project>
