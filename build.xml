@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project name="Compilazione TTG in Cloud">
   <property environment="env" />
+  <property name="pct.home" value="${env.PCT_HOME}"/>
 
-  <taskdef resource="PCT.properties" classpath="/usr/share/ant/lib/PCT.jar"/>
-  <typedef resource="types.properties" classpath="/usr/share/ant/lib/PCT.jar"/>
+  <taskdef resource="PCT.properties" classpath="${pct.home}/lib/PCT.jar"/>
+  <typedef resource="types.properties" classpath="${pct.home}/lib/PCT.jar"/>
 
   <target name="check_env" description="Verifica le variabili d'ambiente richieste">
     <condition property="env.missing">
@@ -11,13 +12,11 @@
         <not><isset property="env.AMBIENTE"/></not>
         <not><isset property="env.DB_PORT"/></not>
         <not><isset property="env.DLC"/></not>
+        <not><isset property="env.PCT_HOME"/></not>
       </or>
     </condition>
     <fail if="env.missing" message="Variabili d'ambiente mancanti. Assicurati che AMBIENTE, DB_PORT, DLC e PCT_HOME siano valorizzate."/>
   </target>
-
-  <taskdef resource="PCT.properties" classpath="${pct.home}/lib/PCT.jar"/>
-  <typedef resource="types.properties" classpath="${pct.home}/lib/PCT.jar"/>
 
   <target name="creDB" description="Create DB TTG from file .df">
     <PCTCreateDatabase dbName="ttgres" destDir="db" schemaFile="db/ttgres.df" dlcHome="${env.DLC}" />
