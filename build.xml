@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project name="TTG on Cloud">
+<project name="Compilazione TTG in Cloud">
   <property environment="env" />
   <property name="pct.home" value="${env.PCT_HOME}"/>
 
-  <target name="check-env" description="Verifica le variabili d'ambiente richieste">
+  <target name="check_env" description="Verifica le variabili d'ambiente richieste">
     <condition property="env.missing">
       <or>
         <not><isset property="env.AMBIENTE"/></not>
@@ -21,7 +21,8 @@
   <target name="creDB" description="Create DB TTG from file .df">
     <PCTCreateDatabase dbName="ttgres" destDir="db" schemaFile="db/ttgres.df" dlcHome="${env.DLC}" />
   </target>
-  <target name="compAPI" depends="check-env" description="Compilazione delle API con i sorgenti nella cartella /appl/${env.AMBIENTE}/aoa">
+
+  <target name="compAPI" depends="check_env" description="Compilazione delle API con i sorgenti nella cartella /appl/${env.AMBIENTE}/aoa">
     <PCTCompile graphicalMode="False" destDir="/appl/${env.AMBIENTE}/rcodeAPI.pct/" displayFiles="1" dlcHome="${env.DLC}">
       <fileset dir="/appl/${env.AMBIENTE}/" includes="aoa/**/*.p, aoa/**/*.w, aoa/**/*.cls" />
       <DBConnection dbName="/db/${env.AMBIENTE}/ttgres" hostName="localhost" dbPort="${env.DB_PORT}" userName="compile" password="compile" singleUser="False" />
@@ -96,8 +97,17 @@
         <pathelement path="${env.DLC}/tty/netlib/OpenEdge.Net.pl"/>
       </propath>
     </PCTCompile>
+    <antcall target="cp_rcode_API" />
   </target>
 
+  <target name="cp_rcode_API" description="Copia i compilati delle API dalla cartella rcodeAPI.pct nella cartella dei sorgenti">
+    <copy todir="/appl/${env.AMBIENTE}/">
+      <fileset dir="/appl/${env.AMBIENTE}/rcodeAPI.pct">
+        <include name="aoa/**/*.r" />
+      </fileset>
+    </copy>
+  </target>
+  
   <target name="compall" description="Compilazione di tutti i sorgenti nella cartella /appl/${env.AMBIENTE}">
           <PCTCompile graphicalMode="False" destDir="/appl/${env.AMBIENTE}/rcode" displayFiles="1" dlcHome="${env.DLC}">
       <fileset dir="/appl/${env.AMBIENTE}/"
@@ -201,14 +211,6 @@
     </copy>
   </target>
 
-  <target name="cp_r_code_aoa" description="Copia r code dalla cartella rcode.pct nella cartella del sorgente">
-    <copy todir="/appl/${env.AMBIENTE}/">
-      <fileset dir="/appl/${env.AMBIENTE}/rcode.pct">
-              <include name="aoa/**/*.r" />
-      </fileset>
-    </copy>
-  </target>
-  
 
   <target name="compsy" description="Compilazione dei sorgenti nella cartella /appl/costaprd/sy">
     <PCTCompile graphicalMode="False" destDir="/appl/costaprd/rcode.pct/" displayFiles="1" dlcHome="${env.DLC}">
