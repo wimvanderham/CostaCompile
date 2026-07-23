@@ -3,8 +3,8 @@
   <property environment="env" />
   <property name="pct.home" value="${env.PCT_HOME}"/>
 
-  <taskdef resource="PCT.properties" classpath="${pct.home}/lib/PCT.jar"/>
-  <typedef resource="types.properties" classpath="${pct.home}/lib/PCT.jar"/>
+  <taskdef resource="PCT.properties" classpath="${pct.home}/PCT.jar"/>
+  <typedef resource="types.properties" classpath="${pct.home}/PCT.jar"/>
 
   <target name="check_env" description="Verifica le variabili d'ambiente richieste">
     <condition property="env.missing">
